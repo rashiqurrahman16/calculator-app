@@ -146,9 +146,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     // ex: 434+324
     if(number1.isNotEmpty&&operand.isNotEmpty&&number2.isNotEmpty){
       // calculate before conversion
-      //TODO
-      // final res = number1 operand number2;
-      // number1 = res;
+      calculate();
     }
     if(operand.isNotEmpty){
       //cannot be converted
@@ -189,6 +187,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
     }
     setState(() {
       number1 = "$result";
+      
+      if (number1.endsWith(".0")){
+        number1 = number1.substring(0, number1.length - 2);
+      }
+      operand = "";
+      number2 = "";
     });
   }
 
@@ -201,8 +205,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if(value!=Btn.dot&&int.tryParse(value)==null){
       //operand pressed
       if(operand.isNotEmpty&&number2.isNotEmpty){
-        //TODO calculate the equation
-
+        calculate();
       }
       operand = value;
     }
